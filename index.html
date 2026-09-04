@@ -349,18 +349,25 @@
 
     </div> <!-- Closes .page-wrapper -->
 
+
+
+    
     <!-- JavaScript to Handle Dynamic Remote Content Loading -->
     <script>
         const exercises = {
             'matlab-workshop': {
                 title: "MATLAB workshop",
-                // CONFIGURATION NOTE: Replace 'YOUR_OTHER_REPO_NAME' and 'YOUR_FILE_NAME.m' with real paths
+                // Pulls your main MATLAB script file dynamically into the preview window
                 fileUrl: "https://githubusercontent.com",
-                repo: "https://github.com"
+                // Opens your public folder layout on GitHub containing your function files and datasets
+                repo: "https://github.com/smietaaim/Simulation-Methods-in-Econometrics-Theory-and-Applications-in-MATLAB/tree/main/exercise%20misc%20MATLAB%20workshop"
             }
-            // You can add entries for your other keys ('asymptotics-lln', 'mc-theory', etc.) here later
         };
 
+
+        
+
+        
         function loadContent(id, element) {
             document.querySelectorAll('.exercise-item').forEach(item => {
                 item.classList.remove('active');
