@@ -328,3 +328,85 @@
                         <li class="exercise-item" onclick="loadContent('boot-wild', this)">Bootstrap wild</li>
                     </ul>
                 </div>
+
+
+
+
+
+
+
+
+                            </div> <!-- Closes .menu-container -->
+        </aside>
+
+        <!-- Right Content Viewer Area -->
+        <main>
+            <div class="content-card" id="display-area">
+                <h1>Welcome!</h1>
+                <p>Select an exercise from the left sidebar to view its details and code repository.</p>
+            </div>
+        </main>
+
+    </div> <!-- Closes .page-wrapper -->
+
+    <!-- JavaScript to Handle Dynamic Remote Content Loading -->
+    <script>
+        const exercises = {
+            'matlab-workshop': {
+                title: "MATLAB workshop",
+                // CONFIGURATION NOTE: Replace 'YOUR_OTHER_REPO_NAME' and 'YOUR_FILE_NAME.m' with real paths
+                fileUrl: "https://githubusercontent.com",
+                repo: "https://github.com"
+            }
+            // You can add entries for your other keys ('asymptotics-lln', 'mc-theory', etc.) here later
+        };
+
+        function loadContent(id, element) {
+            document.querySelectorAll('.exercise-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            if (element) {
+                element.classList.add('active');
+            }
+
+            const data = exercises[id];
+            if (!data) return;
+
+            const displayArea = document.getElementById('display-area');
+            displayArea.innerHTML = `
+                <h1>${data.title}</h1>
+                <p style="color: #888;">Loading file contents from repository...</p>
+            `;
+
+            fetch(data.fileUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Could not find or load the exercise file.");
+                    }
+                    return response.text();
+                })
+                .then(fileText => {
+                    displayArea.innerHTML = `
+                        <h1>${data.title}</h1>
+                        <div class="code-preview">${escapeHtml(fileText)}</div>
+                        <a href="${data.repo}" target="_blank" class="btn">View Repository on GitHub</a>
+                    `;
+                })
+                .catch(error => {
+                    displayArea.innerHTML = `
+                        <h1>${data.title}</h1>
+                        <p style="color: #d32f2f;">❌ Error: ${error.message}</p>
+                        <p style="font-size: 0.85rem; color: #666; margin-top: 5px;">Make sure your other repository is <strong>Public</strong> and the URL path is exactly correct.</p>
+                        <a href="${data.repo}" target="_blank" class="btn" style="margin-top: 15px;">Go to Repository Instead</a>
+                    `;
+                });
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+    </script>
+</body>
+</html>
+
