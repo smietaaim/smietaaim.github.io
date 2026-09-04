@@ -368,15 +368,15 @@
         };
 
 
-        
-        
-        function loadContent(id, element) {
-            // Remove active highlight state from all sidebar items
+
+
+
+
+                function loadContent(id, element) {
             document.querySelectorAll('.exercise-item').forEach(item => {
                 item.classList.remove('active');
             });
 
-            // Set current item to active status
             if (element) {
                 element.classList.add('active');
             }
@@ -390,8 +390,14 @@
                 <p style="color: #888; margin-top: 10px;">Loading file contents from repository...</p>
             `;
 
-            // Download and render the plain text file content
-            fetch(data.fileUrl)
+            // Adds an explicit cache bypass parameter to force the browser to let the text load
+            fetch(data.fileUrl + "?nocache=" + new Date().getTime(), {
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                    'Accept': 'text/plain'
+                }
+            })
                 .then(response => {
                     if (!response.ok) {
                         throw new Error("Could not find or load the exercise file.");
@@ -414,6 +420,10 @@
                     `;
                 });
         }
+
+
+
+        
 
         // Prevents MATLAB symbols and brackets from breaking the web page layout
         function escapeHtml(str) {
