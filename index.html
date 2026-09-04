@@ -345,7 +345,7 @@
                 <!-- Right Content Viewer Area -->
         <main>
             <div class="content-card" id="display-area">
-                <h1>Welcome!</h1>
+                <h1>Welcome.</h1>
                 <p>Select an exercise from the left sidebar to view its details and code repository.</p>
             </div>
         </main>
@@ -354,16 +354,22 @@
 
     <!-- JavaScript to Handle Dynamic Remote Content Loading -->
     <script>
+        
+        
+        
+        
         const exercises = {
             'matlab-workshop': {
                 title: "MATLAB workshop",
-                // This link allows your website to securely download and read your raw code text
+                // Changed /main/ to /master/ to see if your default branch uses the master naming convention
                 fileUrl: "https://githubusercontent.com",
-                // This is your regular repository link that opens when users click the black button
                 repo: "https://github.com"
             }
         };
 
+
+
+        
         function loadContent(id, element) {
             // Remove active highlight state from all sidebar items
             document.querySelectorAll('.exercise-item').forEach(item => {
