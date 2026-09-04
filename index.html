@@ -339,7 +339,10 @@
                             </div> <!-- Closes .menu-container -->
         </aside>
 
-        <!-- Right Content Viewer Area -->
+     
+        
+        
+                <!-- Right Content Viewer Area -->
         <main>
             <div class="content-card" id="display-area">
                 <h1>Welcome!</h1>
@@ -349,20 +352,16 @@
 
     </div> <!-- Closes .page-wrapper -->
 
-
-
-
-
-
-        <!-- JavaScript to Handle Dynamic Remote Content Loading -->
+    <!-- JavaScript to Handle Dynamic Remote Content Loading -->
     <script>
         const exercises = {
             'matlab-workshop': {
                 title: "MATLAB workshop",
+                // This link allows your website to securely download and read your raw code text
                 fileUrl: "https://githubusercontent.com",
+                // This is your regular repository link that opens when users click the black button
                 repo: "https://github.com"
             }
-            // You can add entries for 'asymptotics-lln', etc., right here later!
         };
 
         function loadContent(id, element) {
@@ -385,7 +384,7 @@
                 <p style="color: #888; margin-top: 10px;">Loading file contents from repository...</p>
             `;
 
-            // Securely download the script from GitHub's raw asset pipeline server
+            // Download and render the plain text file content
             fetch(data.fileUrl)
                 .then(response => {
                     if (!response.ok) {
@@ -410,12 +409,10 @@
                 });
         }
 
-        // Formats brackets safely so script arrays do not clash with HTML layout render configurations
+        // Prevents MATLAB symbols and brackets from breaking the web page layout
         function escapeHtml(str) {
             return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
         }
     </script>
 </body>
 </html>
-
-
