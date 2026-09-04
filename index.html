@@ -351,31 +351,29 @@
 
     </div> <!-- Closes .page-wrapper -->
 
-    <!-- JavaScript to Handle Dynamic Remote Content Loading -->
+
+
+
+
+        <!-- JavaScript to Handle Error-Free Window View Loading -->
     <script>
-        
-        
-        
-                const exercises = {
+        const exercises = {
             'matlab-workshop': {
                 title: "MATLAB workshop",
-                // 1. THIS IS THE RAW TEXT SERVER URL:
+                // Points directly to the secure, open text file view
                 fileUrl: "https://githubusercontent.com",
-                // 2. THIS IS YOUR REGULAR REPOSITORY URL:
-                repo: "https://github.com/smietaaim/Simulation-Methods-in-Econometrics-Theory-and-Applications-in-MATLAB/tree/main/exercise%20misc%20MATLAB%20workshop"
+                // Points to the standard folder view for your repository button
+                repo: "https://github.com"
             }
         };
 
-
-
-
-
-
-                function loadContent(id, element) {
+        function loadContent(id, element) {
+            // Remove active highlight state from all sidebar list items
             document.querySelectorAll('.exercise-item').forEach(item => {
                 item.classList.remove('active');
             });
 
+            // Set current item to active status
             if (element) {
                 element.classList.add('active');
             }
@@ -384,50 +382,15 @@
             if (!data) return;
 
             const displayArea = document.getElementById('display-area');
+            
+            // This replaces the old code preview with an embedded iframe that loads your file instantly without network errors
             displayArea.innerHTML = `
-                <h1>${data.title}</h1>
-                <p style="color: #888; margin-top: 10px;">Loading file contents from repository...</p>
+                <h1 style="margin-bottom: 15px; font-size: 1.6rem; color: #111111;">${data.title}</h1>
+                <iframe src="${data.fileUrl}" style="width: 100%; height: 70vh; border: 1px solid #e5e5e5; background-color: #f9f9f9; font-family: monospace; padding: 10px; margin-bottom: 20px;"></iframe>
+                <a href="${data.repo}" target="_blank" class="btn">View Repository on GitHub</a>
             `;
-
-            // Adds an explicit cache bypass parameter to force the browser to let the text load
-            fetch(data.fileUrl + "?nocache=" + new Date().getTime(), {
-                method: 'GET',
-                mode: 'cors',
-                headers: {
-                    'Accept': 'text/plain'
-                }
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Could not find or load the exercise file.");
-                    }
-                    return response.text();
-                })
-                .then(fileText => {
-                    displayArea.innerHTML = `
-                        <h1>${data.title}</h1>
-                        <div class="code-preview">${escapeHtml(fileText)}</div>
-                        <a href="${data.repo}" target="_blank" class="btn">View Repository on GitHub</a>
-                    `;
-                })
-                .catch(error => {
-                    displayArea.innerHTML = `
-                        <h1>${data.title}</h1>
-                        <p style="color: #d32f2f; margin-top: 10px;">❌ Error: ${error.message}</p>
-                        <p style="font-size: 0.85rem; color: #666; margin-top: 5px;">Make sure your repository is <strong>Public</strong> and the file path is correct.</p>
-                        <a href="${data.repo}" target="_blank" class="btn" style="margin-top: 15px;">Go to Repository Instead</a>
-                    `;
-                });
-        }
-
-
-
-        
-
-        // Prevents MATLAB symbols and brackets from breaking the web page layout
-        function escapeHtml(str) {
-            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
         }
     </script>
 </body>
 </html>
+
