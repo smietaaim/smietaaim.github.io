@@ -351,28 +351,27 @@
 
 
 
-    
-    <!-- JavaScript to Handle Dynamic Remote Content Loading -->
+
+
+
+        <!-- JavaScript to Handle Dynamic Remote Content Loading -->
     <script>
         const exercises = {
             'matlab-workshop': {
                 title: "MATLAB workshop",
-                // Pulls your main MATLAB script file dynamically into the preview window
                 fileUrl: "https://githubusercontent.com",
-                // Opens your public folder layout on GitHub containing your function files and datasets
-                repo: "https://github.com/smietaaim/Simulation-Methods-in-Econometrics-Theory-and-Applications-in-MATLAB/tree/main/exercise%20misc%20MATLAB%20workshop"
+                repo: "https://github.com"
             }
+            // You can add entries for 'asymptotics-lln', etc., right here later!
         };
 
-
-        
-
-        
         function loadContent(id, element) {
+            // Remove active highlight state from all sidebar items
             document.querySelectorAll('.exercise-item').forEach(item => {
                 item.classList.remove('active');
             });
 
+            // Set current item to active status
             if (element) {
                 element.classList.add('active');
             }
@@ -383,9 +382,10 @@
             const displayArea = document.getElementById('display-area');
             displayArea.innerHTML = `
                 <h1>${data.title}</h1>
-                <p style="color: #888;">Loading file contents from repository...</p>
+                <p style="color: #888; margin-top: 10px;">Loading file contents from repository...</p>
             `;
 
+            // Securely download the script from GitHub's raw asset pipeline server
             fetch(data.fileUrl)
                 .then(response => {
                     if (!response.ok) {
@@ -403,17 +403,19 @@
                 .catch(error => {
                     displayArea.innerHTML = `
                         <h1>${data.title}</h1>
-                        <p style="color: #d32f2f;">❌ Error: ${error.message}</p>
-                        <p style="font-size: 0.85rem; color: #666; margin-top: 5px;">Make sure your other repository is <strong>Public</strong> and the URL path is exactly correct.</p>
+                        <p style="color: #d32f2f; margin-top: 10px;">❌ Error: ${error.message}</p>
+                        <p style="font-size: 0.85rem; color: #666; margin-top: 5px;">Make sure your repository is <strong>Public</strong> and the file path is correct.</p>
                         <a href="${data.repo}" target="_blank" class="btn" style="margin-top: 15px;">Go to Repository Instead</a>
                     `;
                 });
         }
 
+        // Formats brackets safely so script arrays do not clash with HTML layout render configurations
         function escapeHtml(str) {
             return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
         }
     </script>
 </body>
 </html>
+
 
