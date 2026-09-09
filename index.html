@@ -2,27 +2,57 @@
 <html>
 <head>
 <title>SMiETaAiM</title>
-  
+
 <style>
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden; /* prevent whole page scrolling */
+  }
+
+  /* FIXED TOP SECTION */
+  .top-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    padding: 35px 20px 20px 20px;
+    z-index: 10;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+
+  /* SCROLLING SECTION */
+  .intro-scroll {
+    margin-top: 260px; /* height of fixed section */
+    height: calc(100vh - 260px);
+    overflow-y: auto;
+    padding: 20px;
   }
 </style>
 
 </head>
 <body>
 
+<!-- FIXED TOP PART -->
+<div class="top-fixed">
     <img src="logo.png"
      alt="SMiETaAiM Logo"
-     style="display:block; margin:35px auto 20px auto; width:180px;"/>
+     style="display:block; margin:0 auto 20px auto; width:180px;"/>
 
-  <h1>Simulation Methods in Econometrics: Theory and Applications in MATLAB</h1>
+    <h1>Simulation Methods in Econometrics: Theory and Applications in MATLAB</h1>
+</div>
+
+<!-- SCROLLING CONTENT -->
+<div class="intro-scroll">
+
 <hr/>
 
-
 <p><b>Introduction</b></p>
-<p><a href="https://github.com/smietaaim/Simulation-Methods-in-Econometrics-Theory-and-Applications-in-MATLAB/blob/main/README.md
-">Introduction</a></p>
+<p><a href="https://github.com/smietaaim/Simulation-Methods-in-Econometrics-Theory-and-Applications-in-MATLAB/blob/main/README.md">Introduction</a></p>
 
 <!-- MATLAB Workshop -->
 <p><b>MATLAB Workshop</b></p>
@@ -74,7 +104,7 @@
 <p><a href="https://github.com/smietaaim/Simulation-Methods-in-Econometrics-Theory-and-Applications-in-MATLAB/tree/main/exercise%20importance%20sampling%20theory">Importance Sampling: Theory</a></p>
 <p><a href="https://github.com/smietaaim/Simulation-Methods-in-Econometrics-Theory-and-Applications-in-MATLAB/tree/main/exercise%20importance%20sampling%20tail%20probability">Importance Sampling: Tail Probability Estimation</a></p>
 <p><a href="https://github.com/smietaaim/Simulation-Methods-in-Econometrics-Theory-and-Applications-in-MATLAB/tree/main/exercise%20importance%20sampling%20security%20pricing">Importance Sampling: Security Pricing Application</a></p>
-  
+
 <!-- Markov Chain Monte Carlo -->
 <p><b>Markov Chain Monte Carlo</b></p>
 <p>Discrete and Continuous Stochastic Processes — <em>Work in progress</em></p>
@@ -112,13 +142,16 @@
 <!-- Notation -->
 <p><b>Notation</b></p>
 <p>Mathematical notation and symbols used in this work can be found in the <a href="https://github.com/smietaaim/Simulation-Methods-in-Econometrics-Theory-and-Applications-in-MATLAB/tree/main/exercise%20misc%20notation">Notation Summary</a></p>
-  
+
 <hr/>
-  
+
 <p style="font-size:14px; color:#555; text-align:center;">
   This project is licensed under its custom 
   <a href="https://github.com/smietaaim/Simulation-Methods-in-Econometrics-Theory-and-Applications-in-MATLAB/blob/main/LICENSE">
     copyright and usage terms</a>.
 </p>
 
-  
+</div>
+
+</body>
+</html>
